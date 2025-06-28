@@ -29,9 +29,9 @@ To evaluate whether an ingredient name is closer in meaning to vegan or non-vega
 
 Notably, some ingredient names were uncommon phrases, such as "chicken breast," which were not contained in the vector dataset. When this occurred, I analyzed the words separately. I noticed that in vegan ingredients, the first word tended to be inconclusive, and the second word tended to be a vegan ingredient name itself (as in "red pepper" or "kalamata olives"). In contrast, in meat-based ingredients, the first word tended to by a type of meat, and the second word tended to be a type of cut (as in "chicken breast" or "chicken thigh"). So, in my set of ~75 words, I added a "meat" criterion in addition to the "vegan" and "keto" criteria. I chose to classify a multiple-word ingredient name as vegan if the last word was classified as vegan _and_ the first word was _not_ classified as a type of meat. I found that my model performed well that way. I used similar thinking to design my keto ingredient name classifier. You can follow this logic in "diet_classifiers.py."
 
-## Conclusion and Discussion
+## Results and Discussion
 
-I found that my program classified foods as keto or not keto with 81% accuracy, and vegan or not vegan with 93% accuracy, on a ground-truth dataset of 75 recipes provided by Argmax. (The original dataset had 100 recipes, but I removed 25 duplicate instances of one recipe.)
+I found that my program classified foods as keto or not keto with **81% accuracy**, and vegan or not vegan with **93% accuracy**, on a ground-truth dataset of 75 recipes provided by Argmax. (The original dataset had 100 recipes, but I removed 25 duplicate instances of one recipe.)
 
 To me, this suggests that we, as humans, distinguish between vegan and non-vegan foods more readily than we distinguish between keto and non-keto foods. Indeed, I could immediately label my selected words as vegan or non-vegan because all it takes in knowing where an ingredient comes from. However, I am not an expert on keto diets, so I had to look up a guide, categorize my choices using that guide, and modify my categorizations when they led to incorrect results in the ground-truth dataset.
 
