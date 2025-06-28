@@ -8,6 +8,9 @@ RUN apt-get update && apt-get install -y \
     dos2unix \
     && rm -rf /var/lib/apt/lists/*
 
+# I added this: Install necessary python libraries
+RUN pip install numpy scikit-learn sklearn-crfsuite
+
 # Create data directory
 RUN mkdir -p /app/data
 
