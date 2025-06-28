@@ -41,7 +41,7 @@ The vector dataset may be computer-based, but it is trained on human-written dat
 
 _Vector positions of training words marked as vegan (blue) and non-vegan (red), projected onto the first two principal components. For the most part, they occupy different parts of the space. This allows us to accurately categorize foods as vegan or non-vegan using their vector positions._
 
-![Scatterplot showing the distributions of reference words marked as keto and non-keto in the first two principal components, along with the areas predicted to be keto or non-keto.](./2D%20Vegan%20Classifier.png)
+![Scatterplot showing the distributions of reference words marked as keto and non-keto in the first two principal components, along with the areas predicted to be keto or non-keto.](./2D%20Keto%20Classifier.png)
 
 _Vector positions of training words marked as keto (blue) and non-keto (red), projected onto the first two principal components. Unlike the vegan classifier, there is lots of overlap between the areas occupied by keto and non-keto word vectors. This leads to mixup, confusion, and lower classifier accuracy. This can be addressed by choosing more meaningful features that more closely relate to a food's nutrition information._
 
@@ -49,4 +49,4 @@ If I were to complete this challenge again, I would try to find a dataset that m
 
 ## Credits and Acknowledgements
 
-This challenge taught me many important lessons and techniques. I studied how Docker works, I encountered some useful data science libraries and datasets, and I learned the hard way _not_ to rely on outdated analysis software. I discovered some useful tools and tricks, such as the joblib library and its dump and load features, that I will carry with me as I continue working on data science projects. I designed the machine learning classifier, but Argmax staff wrote the surrounding code and designed the graphical user interface. I am grateful to Argmax for the valuable learning opportunity, which helped me expand my capabilities as a data scientist.
+This challenge taught me many important lessons and techniques. I studied how Docker works, encountered some useful data science libraries and datasets, and learned the hard way _not_ to rely on outdated analysis software. I discovered some useful tools and tricks, such as the joblib library and its dump and load features, that I will carry with me as I continue working on data science projects. I designed the machine learning classifier, but Argmax staff wrote the surrounding code and designed the graphical user interface. I am grateful to Argmax for the valuable learning opportunity, which helped me expand my capabilities as a data scientist.
