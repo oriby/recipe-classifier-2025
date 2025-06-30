@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from opensearchpy import OpenSearch
 from decouple import config
-from diet_classifiers import is_keto, is_vegan
+#from diet_classifiers import is_keto, is_vegan
 from time import sleep
 import sys
 import logging
@@ -89,21 +89,37 @@ def select2():
 @app.route('/search', methods=['GET'])
 def search_by_ingredients():
     ingredient = request.args.get('q', '')
+    keto_only = request.args.get('k', '') == "true"
+    vegan_only = request.args.get('v', '') == "true"
     if not ingredient:
         return jsonify({'error': 'Please provide an ingredient name'}), 400
 
     ingredient_ids = [int(id_) for id_ in ingredient.split() if id_.isdigit()]
     ingredient_ids = [ingredients[id_] for id_ in ingredient_ids]
     ingredient = " ".join(ingredient_ids)
+    logger.info(keto_only)
 
     # Create the search query
+    query_filters = []
+
+    if keto_only:
+        query_filters.append({ "term": { "is_keto": True } })
+
+    if vegan_only:
+        query_filters.append({ "term": { "is_vegan": True } })
+
     query = {
         "query": {
-            "match": {
-                "ingredients": {
-                    "query": ingredient,
-                    "fuzziness": "AUTO"
-                }
+            "bool": {
+                "must": {
+                    "match": {
+                        "ingredients": {
+                            "query": ingredient,
+                            "fuzziness": "AUTO"
+                        }
+                    }
+                },
+                "filter": query_filters  # May be empty or contain one/both filters
             }
         }
     }
@@ -118,14 +134,15 @@ def search_by_ingredients():
 
         # Format the results
         hits = response['hits']['hits']
+        logger.info("Reading pre-loaded keto and vegan status")
         results = [{
             'title': hit['_source']['title'],
             'description': hit['_source'].get('description', ''),
             'ingredients': hit['_source']['ingredients'],
             'instructions': hit['_source'].get('instructions', ''),
             'photo_url': hit['_source'].get('photo_url', ''),
-            'keto': is_keto(hit['_source']['ingredients']),
-            'vegan': is_vegan(hit['_source']['ingredients']),
+            'keto': hit['_source']['is_keto'], # is_keto(hit['_source']['ingredients']),
+            'vegan': hit['_source']['is_vegan'], # is_vegan(hit['_source']['ingredients']),
             'score': hit['_score']
         } for hit in hits]
         return jsonify({

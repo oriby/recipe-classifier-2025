@@ -14,8 +14,8 @@ RUN pip install numpy scikit-learn sklearn-crfsuite
 # Create data directory
 RUN mkdir -p /app/data
 
-# Download the parquet file
-RUN curl -L https://argmax.nyc3.digitaloceanspaces.com/recipes/allrecipes.parquet -o /app/data/allrecipes.parquet
+# Copy the parquet file
+COPY src/allrecipes_extended.parquet /app/data
 
 # Copy requirements first to leverage Docker cache
 COPY requirements.txt .

@@ -202,7 +202,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int,
                         default=1024, help="Batch size for indexing")
     parser.add_argument("--data_file", type=str,
-                        default="data/allrecipes.parquet", help="Path to the Parquet file")
+                        default="data/allrecipes_extended.parquet", help="Path to the Parquet file")
     parser.add_argument("--ingredients_file", type=str,
                         default="data/ingredients.json", help="Path to the ingredients file")
     parser.add_argument("--opensearch_url", type=str,

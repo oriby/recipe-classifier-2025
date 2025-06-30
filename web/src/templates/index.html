@@ -38,6 +38,12 @@
             </div>
         </div>
 
+        <!-- Selection Checkboxes -->
+        <input type="checkbox" id="keto_checkbox" value="Keto">
+        <label for="keto_checkbox"> Show keto recipes</label><br>
+        <input type="checkbox" id="vegan_checkbox" value="Vegan">
+        <label for="vegan_checkbox"> Show vegan recipes</label><br>
+
         <!-- Results Container -->
         <div class="row" id="resultsContainer">
         </div>
@@ -89,6 +95,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
     <script>
+        let keto_only = false
+        let vegan_only = false
+
         $(document).ready(function() {
             // Initialize Select2
             $('#ingredientSearch').select2({
@@ -121,13 +130,24 @@
                 }
             });
 
+            // Handle changes in checkboxes
+            $('#keto_checkbox').change(function() {
+                keto_only = $(this).is(':checked');
+                //$('#resultsContainer').append(keto_only.toString());
+            });
+
+            $('#vegan_checkbox').change(function() {
+                vegan_only = $(this).is(':checked');
+                //$('#resultsContainer').append(vegan_only.toString());
+            });
+
             // Initialize modal
             const recipeModal = new bootstrap.Modal(document.getElementById('recipeModal'));
         });
 
         function searchRecipes(ingredients) {
             const query = ingredients.join(' ');
-            $.get('/search', { q: query })
+            $.get('/search', { q: query, k: keto_only, v: vegan_only })
                 .done(function(data) {
                     displayResults(data.results);
                 })
