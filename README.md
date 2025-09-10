@@ -3,7 +3,7 @@ Author: Ori Ben Yossef ([LinkedIn](https://www.linkedin.com/in/ori-ben-yossef/))
 
 Date: June 28, 2025
 
-This machine-learning-based program classifies recipes as vegan or not vegan, and keto-friendly or not keto-friendly, based on a list of ingredients. I programmed this classifier as part of an online challenge posed by [Argmax](https://argmaxml.com/) as part of their hiring process.
+This machine-learning-based program classifies recipes as vegan or not vegan, and keto-friendly or not keto-friendly, based on a list of ingredients. I programmed this classifier as part of an online challenge posed by [Argmax](https://argmaxml.com/).
 
 ## Summary
 
